@@ -6,19 +6,24 @@
 *   3 袋外错误率（oob error）
 *   4 随机森林的特点
 *   5 随机森林工作原理解释的一个简单例子
-*   6 参考内容
+*   6 sklearn参数
+*   7 参考内容
 
 ### 1 什么是随机森林？
 
 &#8195;&#8195;随机森林是一种统计学习理论，它利用Booststrap重抽样方法，从原始样本中抽取多个样本，再对每个bootstrap样本进行决策树建模，然后组合成多课决策树进行预测，并通过投票得出最终的预测结果。
+
 &#8195;&#8195;它的本质属于机器学习的一大分支——集成学习（Ensemble Learning）方法。随机森林有两个关键词，一个是“随机”，一个就是“森林”。“森林”我们很好理解，一棵叫做树，那么成百上千棵就可以叫做森林了，这是随机森林的主要思想--集成思想的体现。“随机”的含义我们会在下边部分讲到。
+
 &#8195;&#8195;其实从直观角度来解释，每棵决策树都是一个分类器（假设现在针对的是分类问题），那么对于一个输入样本，N棵树会有N个分类结果。而随机森林集成了所有的分类投票结果，将投票次数最多的类别指定为最终的输出，这就是一种最简单的 Bagging 思想。
+
 #### boostrap重抽样
 核心思想。在n个原始样本数据的范围内，做有放回的抽样。样本容量保持是n，每个子样本被抽到的概率相等，即为1/n。将样本看作整体，将从样本中抽样得到的子样本称为bootstrap样本。
 
 ### 2 随机森林的生成
 &#8195;&#8195;随机森林属于集成模型的一种。它由若干棵决策树构成，最终的判断结果由每一棵决策树的结果进行简单投票决定。
-步骤：
+
+##### 步骤：
 
 ![image](https://github.com/flysaint/Datawhale-/blob/master/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4.png)
 
@@ -35,11 +40,11 @@
 &#8195;&#8195;这些随机操作能很好地增强模型的泛化能力，有效避免了过拟合的问题。也别其他一些模型所借鉴（例如极大梯度提升树）。
 
 在1中，每次有放回地生成同等样本量的数据集时，大约有1/3的样本没有被选中，留作“袋外数据”。
-在2中，假设原有m个属性，在第2步中一般选择$\log2 m个属性进行决策树开发。$
+在2中，假设原有m个属性，在第2步中一般选择$\log_2 m个属性进行决策树开发。$
 
 #### 决策树结果的融合
 
-得到若干棵决策树后，会对模型的结果进行融合。在随机森林中，融合的方法通常是简单投票法。假设K棵决策树的投票分别是$t_1,  t_2,…,t_K,  t_i∈{0,1}，最终的分类结果是$
+得到若干棵决策树后，会对模型的结果进行融合。在随机森林中，融合的方法通常是简单投票法。假设K棵决策树的投票分别是$t_1,  t_2,…,t_K,  t_i∈{0,1}，最终的分类结果是
 ![](https://github.com/flysaint/Datawhale-/blob/master/%E5%88%86%E7%B1%BB%E7%BB%93%E6%9E%9C%E5%85%AC%E5%BC%8F.png)
 
 随机森林的输出概率
@@ -90,7 +95,7 @@
 
 **描述**：根据已有的训练集已经生成了对应的随机森林，随机森林如何利用某一个人的年龄（Age）、性别（Gender）、教育情况（Highest Educational Qualification）、工作领域（Industry）以及住宅地（Residence）共5个字段来预测他的收入层次。
 
-**　　收入层次 :**
+**收入层次 :**
 
 　　　　Band 1 : Below $40,000
 
@@ -100,23 +105,23 @@
 
 　　随机森林中每一棵树都可以看做是一棵CART（分类回归树），这里假设森林中有5棵CART树，总特征个数N=5，我们取m=1（这里假设每个CART树对应一个不同的特征）。
 
-**　　CART 1 : Variable Age**
+**CART 1 : Variable Age**
 
 　　![rf1](http://www.analyticsvidhya.com/blog/wp-content/uploads/2014/06/rf1.png)
 
-**　　CART 2 : Variable Gender**
+**CART 2 : Variable Gender**
 
 　　![rf2](http://www.analyticsvidhya.com/blog/wp-content/uploads/2014/06/rf2.png)
 
-**　　CART 3 : Variable Education**
+**CART 3 : Variable Education**
 
 　　![rf3](http://www.analyticsvidhya.com/blog/wp-content/uploads/2014/06/rf3.png)
 
-**　　CART 4 : Variable Residence**
+**CART 4 : Variable Residence**
 
 　　![rf4](http://www.analyticsvidhya.com/blog/wp-content/uploads/2014/06/rf4.png)
 
-**　　CART 5 : Variable Industry**
+**CART 5 : Variable Industry**
 
 　　![rf5](http://www.analyticsvidhya.com/blog/wp-content/uploads/2014/06/rf5.png)
 
@@ -129,7 +134,28 @@
 　　![DF](http://www.analyticsvidhya.com/blog/wp-content/uploads/2014/06/DF.png)
 
 　　最后，我们得出结论，这个人的收入层次70%是一等，大约24%为二等，6%为三等，所以最终认定该人属于一等收入层次（小于$40,000）。
-  
+
+### 6 skrlean learning 参数
+class sklearn.ensemble.RandomForestClassifier（
+    n_estimators=10, 
+    criterion='gini',
+    max_depth=None, 
+    min_samples_split=2, 
+    min_samples_leaf=1, 
+    min_weight_fraction_leaf=0.0,
+    max_features='auto', 
+    max_leaf_nodes=None, 
+    min_impurity_decrease=0.0, 
+    min_impurity_split=None, 
+    bootstrap=True, 
+    oob_score=False, 
+    n_jobs=1, 
+    random_state=None, 
+    verbose=0, 
+    warm_start=False, 
+    class_weight=None
+    )
+
 ### 6 参考内容
 # [Machine Learning & Algorithm] 随机森林（Random Forest）](https://www.cnblogs.com/maybe2030/p/4585705.html)
 

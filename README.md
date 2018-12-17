@@ -136,6 +136,8 @@
 　　最后，我们得出结论，这个人的收入层次70%是一等，大约24%为二等，6%为三等，所以最终认定该人属于一等收入层次（小于$40,000）。
 
 ### 6 skrlean learning 参数
+
+''' python
 class sklearn.ensemble.RandomForestClassifier（
     n_estimators=10, 
     criterion='gini',
@@ -155,7 +157,7 @@ class sklearn.ensemble.RandomForestClassifier（
     warm_start=False, 
     class_weight=None
     )
-
+'''
 ### 6 参考内容
 # [Machine Learning & Algorithm] 随机森林（Random Forest）](https://www.cnblogs.com/maybe2030/p/4585705.html)
 

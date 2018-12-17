@@ -135,29 +135,36 @@
 
 　　最后，我们得出结论，这个人的收入层次70%是一等，大约24%为二等，6%为三等，所以最终认定该人属于一等收入层次（小于$40,000）。
 
-### 6 skrlean learning 参数
 
-''' python
-class sklearn.ensemble.RandomForestClassifier（
-    n_estimators=10, 
-    criterion='gini',
-    max_depth=None, 
-    min_samples_split=2, 
-    min_samples_leaf=1, 
-    min_weight_fraction_leaf=0.0,
-    max_features='auto', 
-    max_leaf_nodes=None, 
-    min_impurity_decrease=0.0, 
-    min_impurity_split=None, 
-    bootstrap=True, 
-    oob_score=False, 
-    n_jobs=1, 
-    random_state=None, 
-    verbose=0, 
-    warm_start=False, 
-    class_weight=None
-    )
-'''
-### 6 参考内容
-# [Machine Learning & Algorithm] 随机森林（Random Forest）](https://www.cnblogs.com/maybe2030/p/4585705.html)
+### 6  sklearn参数
+
+
+```python
+class sklearn.ensemble.RandomForestClassifier（ 
+n_estimators=10, // 弱学习器的最大迭代次数，或者说最大的弱学习器的个数，默认是10
+criterion='gini', // CART树做划分时对特征的评价标准，分类模型和回归模型的损失函数是不一样的。
+max_depth=None, // 决策树最大深度
+min_samples_split=2, // 内部节点再划分所需最小样本数，默认2
+min_samples_leaf=1, // 叶子节点最少样本数
+min_weight_fraction_leaf=0.0, // 叶子节点最小的样本权重和
+max_features='auto', // RF划分时考虑的最大特征数
+max_leaf_nodes=None, // 最大叶子节点数
+min_impurity_decrease=0.0, 
+min_impurity_split=None, //  节点划分最小不纯度。这个值限制了决策树的增长，如果某节点的不纯度(基于基尼系数，均方差)小于这个阈值，则该节点不再生成子节点，即为叶子节点 。一般不推荐改动默认值1e-7。
+bootstrap=True, // 默认True，是否有放回的采样
+oob_score=False, // 默认识False，即是否采用袋外样本来评估模型的好坏。
+n_jobs=1, // 并行job个数。这个在ensemble中非常重要，尤其是bagging（而非boosting，因为boosting的每次迭代之间有影响，所以很难进行并行化）。1=不并行；n：n个并行；-1：CPU有多少core，就启动多少job。
+random_state=None, // 此参数让结果容易复现。 一个确定的随机值将会产生相同的结果，在参数和训练数据不变的情况下。 我曾亲自尝试过将不同的随机状态的最优参数模型集成，有时候这种方法比单独的随机状态更好。
+verbose=0, // (default=0) 是否显示任务进程
+warm_start=False, // 热启动，决定是否使用上次调用该类的结果然后增加新的。
+class_weight=None // 各个label的权重
+)
+```
+
+
+### 7 参考内容
+##### [Machine Learning & Algorithm] 随机森林（Random Forest）](https://www.cnblogs.com/maybe2030/p/4585705.html)
+##### [sklearn中随机森林的参数](https://www.cnblogs.com/harvey888/p/6512312.html)
+
+
 

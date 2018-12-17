@@ -19,9 +19,10 @@
 ### 2 随机森林的生成
 &#8195;&#8195;随机森林属于集成模型的一种。它由若干棵决策树构成，最终的判断结果由每一棵决策树的结果进行简单投票决定。
 步骤：
+
 ![image](https://github.com/flysaint/Datawhale-/blob/master/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4.png)
 
-![](index_files/2e0705b0-9ffc-470a-92cf-a0cbf3852373.jpg)
+![](https://github.com/flysaint/Datawhale-/blob/master/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E5%9B%BE%E8%A7%A3.png)
 
 #### 数据集的抽取
 
@@ -39,11 +40,11 @@
 #### 决策树结果的融合
 
 得到若干棵决策树后，会对模型的结果进行融合。在随机森林中，融合的方法通常是简单投票法。假设K棵决策树的投票分别是$t_1,  t_2,…,t_K,  t_i∈{0,1}，最终的分类结果是$
-![](index_files/ca3204be-0128-4c99-b444-95b04bd75462.png)
+![](https://github.com/flysaint/Datawhale-/blob/master/%E5%88%86%E7%B1%BB%E7%BB%93%E6%9E%9C%E5%85%AC%E5%BC%8F.png)
 
 随机森林的输出概率
 同时随机森林也支持以概率的形式输出结果：
-![](index_files/4a2000cf-3e23-466e-bbc9-25868b3ff4c7.png)
+![](https://github.com/flysaint/Datawhale-/blob/master/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%85%AC%E5%BC%8F.png)
 
 ### 3 袋外错误率（oob error）
 
@@ -68,10 +69,10 @@
 
 ### 4 随机森林的特点
 #### 收敛性
-![](index_files/15bf6ba7-5267-4a22-81fc-96b30447d9e5.png)
+![](https://github.com/flysaint/Datawhale-/blob/master/%E6%94%B6%E6%95%9B%E6%80%A7.png)
 
 #### 泛化误差上界
-![](index_files/992386be-e49e-4034-8705-dfbd45b9a8c6.png)
+![](https://github.com/flysaint/Datawhale-/blob/master/%E6%B3%9B%E5%8C%96%E8%AF%AF%E5%B7%AE%E4%B8%8A%E7%95%8C.png)
 
 #### 优点
 * 能够有效的运行在大数据集上。

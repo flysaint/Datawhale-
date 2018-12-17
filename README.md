@@ -19,7 +19,7 @@
 ### 2 随机森林的生成
 &#8195;&#8195;随机森林属于集成模型的一种。它由若干棵决策树构成，最终的判断结果由每一棵决策树的结果进行简单投票决定。
 步骤：
-![image]https://github.com/flysaint/Datawhale-/blob/master/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4.png
+![image](https://github.com/flysaint/Datawhale-/blob/master/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4.png)
 
 ![](index_files/2e0705b0-9ffc-470a-92cf-a0cbf3852373.jpg)
 

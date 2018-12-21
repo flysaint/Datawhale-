@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 目录
 * 1 GBDT思想
 * 2 GBDT的分类——回归分类与多元分类

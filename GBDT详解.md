@@ -40,14 +40,16 @@ GBDT分类算法依据分类的数量，分为二元分类和多元分类算法�
 
 &#8195;&#8195;算法3就是GBDT用于分类任务时，loss funcion选用logloss的算法流程。可以看到，和回归任务是一样的，并没有什么特殊的处理环节。（其实在sklearn源码里面，虽然回归任务的模型定义是GradientBoostingRegressor()而分类任务是GradientBoostingClassifier()，但是这两者区分开来是为了方便用户使用，最终两者都是共同继承BaseGradientBoosting()，算法3这些流程都是在BaseGradientBoosting()完成的，GradientBoostingRegressor()、GradientBoostingClassifier()只是完成一些学习器参数配置的任务）
 ##### 2.2.2 多元分类算法
-多元分类算法过程和二分类的GBDT类似，但是有一个地方有很大的不同，下文将详细的介绍。
+多元分类算法过程和二分类的GBDT类似，但是有一个地方有很大的不同，下文将介绍。
 
 ![](https://github.com/flysaint/Datawhale-/blob/master/GBDT%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95.png)
 
 从代码上看，大致和分类时候的过程一样。最大的不同点在于多了一层内部的循环For。
 这里需要注意的是： 
+
 1.对于多分类任务，GDBT的做法是采用一对多的策略。
 也就是说，对每个类别训练M个分类器。假设有K个类别，那么训练完之后总共有M*K颗树。 
+
 2.两层循环的顺序不能改变。也就是说，K个类别都拟合完第一颗树之后才开始拟合第二颗树，不允许先把某一个类别的M颗树学习完，再学习另外一个类别。
 
 ### 3 梯度提升和梯度下降

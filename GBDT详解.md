@@ -18,7 +18,7 @@
 注意：当然在回归任务中，分裂准则也不再局限于用MSE，也可以用MAE，还可以用Friedman_mse（改进型的mse)。
 &#8195;&#8195;GBDT用于回归和分类任务时，使用的不同的loss function，但其本质还是一样的。下面分别介绍 GBDT回归算法和分类算法。
 #### 2.1 GBDT回归算法
-![](https://img-blog.csdn.net/20180128125923199?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjIyMzg1MzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](https://github.com/flysaint/Datawhale-/blob/master/GBDT%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.png)
 算法第1步，是一个初始化的过程。因为每次计算的时候，需要用到前一个模型的预测值，这里会有一个$F_0(x_i)$存在，取值大小依赖损失函数的选择，比如损失函数用MSE时，$F_0(x_i)$ = $\overline{y}$，$\overline{y}$为初始样本平均值。
 
 算法第3步，就是我们上面说的损失函数的负梯度在当前模型的值。
@@ -33,13 +33,13 @@
 GBDT分类算法依据分类的数量，分为二元分类和多元分类算法。
 ##### 2.2.1 二元分类算法
 &#8195;&#8195;其实不论对于回归和分类，GBDT过程几乎一模一样的。最大的不同在于因loss function不同而引起的初始化不同、叶子节点取值不同。
-![](index_files/7c238a17-792c-43b4-b6bc-4898f17f50ea.png)
+![](https://github.com/flysaint/Datawhale-/blob/master/GBDT%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95.png
 
 &#8195;&#8195;算法3就是GBDT用于分类任务时，loss funcion选用logloss的算法流程。可以看到，和回归任务是一样的，并没有什么特殊的处理环节。（其实在sklearn源码里面，虽然回归任务的模型定义是GradientBoostingRegressor()而分类任务是GradientBoostingClassifier()，但是这两者区分开来是为了方便用户使用，最终两者都是共同继承BaseGradientBoosting()，算法3这些流程都是在BaseGradientBoosting()完成的，GradientBoostingRegressor()、GradientBoostingClassifier()只是完成一些学习器参数配置的任务）
 ##### 2.2.2 多元分类算法
 多元分类算法过程和二分类的GBDT类似，但是有一个地方有很大的不同，下文将详细的介绍。
 
-![](index_files/220ae6a3-339b-41d3-9654-a959f5deb966.png)
+![](https://github.com/flysaint/Datawhale-/blob/master/GBDT%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95.png)
 从代码上看，大致和分类时候的过程一样。最大的不同点在于多了一层内部的循环For。
 这里需要注意的是： 
 1.对于多分类任务，GDBT的做法是采用一对多的策略。

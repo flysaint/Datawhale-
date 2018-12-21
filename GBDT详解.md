@@ -1,12 +1,4 @@
-<head>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
-            }
-        });
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 目录
 * 1 GBDT思想
@@ -163,5 +155,4 @@ $\nu$的取值范围为$0 &lt; \nu \leq 1 $。对于同样的训练集学习效�
 [scikit-learn 梯度提升树(GBDT)调参小结](https://www.cnblogs.com/pinard/p/6143927.html)]
 《统计学习方法》—李航
 《百面机器学习》——葫芦娃
-    </script>
-</head>
+

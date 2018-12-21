@@ -83,7 +83,7 @@ $$r(y_i, f(x_i))=<br>\begin{cases}<br>y_i-f(x_i)&amp; {|y_i-f(x_i)| \leq \delta}
 它对应的是分位数回归的损失函数，表达式为$$L(y, f(x)) =\sum\limits_{y \geq f(x)}\theta|y - f(x)| + \sum\limits_{y &lt; f(x)}(1-\theta)|y - f(x)|&nbsp;$$
 其中$\theta$为分位数，需要我们在回归前指定。对应的负梯度误差为：
 $$r(y_i, f(x_i))=<br>\begin{cases}<br>\theta&amp; { y_i \geq f(x_i)}\\<br>\theta - 1 &amp; {y_i &lt; f(x_i) }<br>\end{cases}$$
-对于Huber损失和分位数损失，主要用于健壮回归，也就是减少异常点对损失函数的影响。
+对于Huber损失和分位数损失，主要用于减少异常点对损失函数的影响。
 三种损失函数对应的梯度表：
 ![](https://pic2.zhimg.com/80/v2-8cb6283bbf2e1077dfb02daf722c69d9_hd.png)
 
@@ -149,12 +149,20 @@ $\nu$的取值范围为$0 &lt; \nu \leq 1 $。对于同样的训练集学习效�
 ### 8 参考资料
 
 [梯度提升树(GBDT)原理小结](https://www.cnblogs.com/pinard/p/6140514.html)
+
 [GBDT原理与Sklearn源码分析-回归篇](https://blog.csdn.net/qq_22238533/article/details/79185969)
+
 [GBDT原理与Sklearn源码分析-分类篇](https://blog.csdn.net/qq_22238533/article/details/79192579)
+
 [GBDT原理与实践-多分类篇](https://blog.csdn.net/qq_22238533/article/details/79199605)
+
 [当我们在谈论GBDT：Gradient Boosting 用于分类与回归](https://zhuanlan.zhihu.com/p/25257856)
+
 [GBDT的那些事儿](https://zhuanlan.zhihu.com/p/30711812)
+
 [scikit-learn 梯度提升树(GBDT)调参小结](https://www.cnblogs.com/pinard/p/6143927.html)]
+
 《统计学习方法》—李航
+
 《百面机器学习》——葫芦娃
 

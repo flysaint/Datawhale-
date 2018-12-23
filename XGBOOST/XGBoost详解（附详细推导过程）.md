@@ -92,8 +92,11 @@ $$ \min_{js}[\min_{c_1}Loss(y_i,c_1) + \min_{c_2}Loss(y_i,c_2)] $$
 ### 2.3 单变量回归树
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/%E5%8D%95%E5%8F%98%E9%87%8F%E5%9B%9E%E5%BD%92%E6%A0%91.png)
 如上图所示，假设回归树模型是通过时间划分的，则当 
+
 t < 2010/03/20时，回归树 = 0.2 对应最左边的直线。
+
 t >= 2011/03/01时，回归树 = 1.0，对应最右边的直线。
+
 t < 2011/03/01 且 t>= 2010/03/20时,对应中间的直线。
 
 ### 2.4 回归树拟合情况
@@ -112,37 +115,52 @@ t < 2011/03/01 且 t>= 2010/03/20时,对应中间的直线。
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/%E5%9B%9E%E5%BD%92%E6%A0%91%E9%9B%86%E6%88%90.jpg)
 
 
-公式如下图，$\hat{y}_i$ = $\sum$$_{k=1}^K$$f_k$$x_{ij}$, $f_k\in F$ 。每个样本点的残差是所有回归树残差之和。
+公式如下图，$\hat{y}_i = \sum_{k=1}^Kf_kx_{ij}$, $f_k\in F$ 。每个样本点的残差是所有回归树残差之和。
 
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/%E5%9B%9E%E5%BD%92%E6%A0%91%E9%9B%86%E6%88%902.png)
 
 ## 3 XGBoost梯度提升树  
 什么是提升树算法？一句话是，每t轮的预测结果 = 第 t-1 预测结果 + t轮新的函数值。如下图step4。
+
 step1 表示 初始化时（理解未第0轮），预测值 = 0。
-step2 表示第1轮的预测提升树的预测值，
-step3 表示第2轮的预测提升树的预测值，
+
+step2 表示第1轮的预测提升树的预测值。
+
+step3 表示第2轮的预测提升树的预测值。
+
 step4 表示第t轮的预测提升树的预测值。
+
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/XGBoost%E9%A2%84%E6%B5%8B%E5%80%BC_00.png)
 
 ### 3.1 最小二乘损失函数推导
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/3.1%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%8E%A8%E5%AF%BC.png)
 说明：
+
 step1 是提升树在 第 t轮的预测值。
+
 step2 将目标函数展开未 损失函数和正则项
-step3 是 将第t轮损失函数的预测值 $\hat{y}_i$ 拆分为第t-1轮的预测值$\hat{y}_i^{(t-1)}$和第t轮的函数值$f_t(x_i)$。将第t轮的累积正则项 $\sum$$_{i=1}^t\Omega(f_i)$拆分为 第t的
-正则项$\Omega(f_i)$ + 常数constant(前t-1轮累加的正则项，已计算得出，可看作常数)。</p>
+
+step3 是 将第t轮损失函数的预测值 $\hat{y}_i$ 拆分为第t-1轮的预测值$\hat{y}_i^{(t-1)}$和第t轮的函数值$f_t(x_i)$。将第t轮的累积正则项 $\sum$$_{i=1}^t\Omega(f_i)$拆分为 第t的正则项$\Omega(f_i)$ + 常数constant(前t-1轮累加的正则项，已计算得出，可看作常数)。</p>
+
 Step4 假设损失函数是square loss(最小二乘损失)。</p>
+
 Step5 将损失函数展开，并且将 $(y_i$ - $\hat{y}_i^{(t-1)})^2$作为常数并入 constant，因为 在第t轮，$\hat{y}_i^{(t-1)}$ 和 $y_i$都是已知值。
 
 
 ### 3.2 泰勒展开损失函数
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/3.2%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png)
 说明：
+
 step1。第t轮的目标函数，这里的t-1已经展开。
+
 step2。就是泰勒二阶展开式的公式。
+
 step3。在第t轮，$g_i$和$h_i$都可以看作常数。因为 $y_i$和$\hat{y}_i^{(t-1)}$都是已知值。
+
 step4。将step1，使用step2中泰勒二阶展开后，再使用step3带入后的损失函数的结果。
+
 step5。将$g_i$和$h_i$进一步做简化方便，用于后续进一步简化目标函数。
+
 step6。最终的目标函数结果。
 
 ### 3.3 目标函数求解
@@ -170,9 +188,13 @@ $w_j^2$代表L2正则项，用于防止模型过拟合。
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/3.3.3%E5%90%88%E5%B9%B6%E7%AE%80%E5%8C%96.png)
 
 **step1** 表示样本i，被映射到第j号叶子。
+
 **step2** 直接使用 3.2小节 中的目标函数的泰勒二级展开式结果。
+
 **step3** 使用3.3.1 和3.3.2 中简化的结果。
+
 step4 将step3中按 样本残差累加，转变为按照叶子的权值进行累加。可以想象一个 样本为行，叶子节点为列的拟合矩阵。step3是按照行进行累加，step4是按照列进行累加。
+
 比如：
 $\sum_{i=1}^n g_iw_{q(x_i)}$ 是将每n样本点对应的拟合值的累加。
 $\sum_{j=1}^T(\sum_{i \in I_j}g_i)w_j$ 是上式n个样本点的拟合值累加，转换到$T$个叶子节点拟合值累加。
@@ -180,8 +202,11 @@ $\sum_{j=1}^T(\sum_{i \in I_j}g_i)w_j$ 是上式n个样本点的拟合值累加�
 #### 3.3.4 目标函数再次简化
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/3.3.4%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E5%86%8D%E6%AC%A1%E7%AE%80%E5%8C%96.png)
 说明：
+
 **step1**: 目标函数 $argmin_x Gx + \frac 12 Hx^2$，求导可得，在 $ x= - \frac GH,H>0时，$取得最小值 $ -\frac12 \frac {G^2}H $。
+
 **step2,3**：将 $G_j和H_j$带入后简化。
+
 **step4**: 将step1和step2,3中的结论带入。将 step3中的$w_j^* ,G_j,(H_j+ \lambda),分别看作step1中的x,G,H$,则此时目标函数 $Obj = -\frac12 \frac {G^2}H $ = $ -\frac 12 \sum_{j=1}^T \frac {G_j^2}{H_j+\lambda} + \gamma T$
 当树的结构固定时，我们就可以求得参数，让目标函数取得极小值。
 
@@ -212,7 +237,9 @@ $\sum_{j=1}^T(\sum_{i \in I_j}g_i)w_j$ 是上式n个样本点的拟合值累加�
 ### 3.5 剪枝与正则化
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/%E5%89%AA%E6%9E%9D%E4%B8%8E%E6%AD%A3%E5%88%99%E5%8C%96.png)
 什么时候停止分裂，进行剪枝呢？这里有两种剪枝策略。
+
 1 前剪枝。当最佳分裂节点，出现负的gain时，就进行剪枝。缺点是，继续分裂可能得到更好的gain，这样剪枝会错过更好gain。
+
 2.后剪枝。先让子树生长到最大的深度，从下往上，把所有Gain为负的叶子剪掉，直到节点的gain为正数为止。
 
 ### 3.6 其他问题
@@ -224,13 +251,17 @@ XGBoost只能处理连续变量，因此如果出现分类变量，如性别等�
 #### 3.6.3 回到时间序列的问题，如果想学习阶跃函数。除了从上到下的分割方法，还有其他学习时间分割的方法吗?
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/3.6.3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98.png)
 关键还是在于计算分裂的目标函数得分。有三种方案：
+
 1）自顶向下贪婪。
+
 2）自底向上贪婪。将每个点当作单独分组，用贪婪算法合并邻近的分组。
+
 3）动态规划。可以找到最优的解决方案。
 
 #### 3.6.4 XGBoost如何处理缺失值？
 XGBoost会把缺失值当作稀疏矩阵来对待，进行分裂时，只计算非缺失的数值，然后把缺失值放到左右子树再次计算Gain，选择Gain较大的方式分裂。
 如果出现训练集没有缺失值，而测试集出现缺失值，则缺失值会默认分配到右子树进行计算。具体算法如下：
+
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86.png)
 
 ## 4 XGBoost与GBDT的联系和区别有哪些？
@@ -254,7 +285,9 @@ XGBoost会把缺失值当作稀疏矩阵来对待，进行分裂时，只计算�
 
 XGBoost的作者把所有的参数分成了三类： 
 1、通用参数：宏观函数控制。 
+
 2、Booster参数：控制每一步的booster(tree/regression)。 
+
 3、学习目标参数：控制训练目标的表现。 
 在这里我会类比GBM来讲解，所以作为一种基础知识，强烈推荐先阅读[这篇文章](http://www.analyticsvidhya.com/blog/2016/02/complete-guide-parameter-tuning-gradient-boosting-gbm-python/)。
 
@@ -386,11 +419,17 @@ XGBoost的作者把所有的参数分成了三类： 
 
 
 [Regression Tree 回归树](https://blog.csdn.net/weixin_40604987/article/details/79296427)
+
 [xgboost原理](https://blog.csdn.net/a819825294/article/details/51206410)
+
 [怎么理解决策树、xgboost能处理缺失值？而有的模型(svm)对缺失值比较敏感呢?](https://www.zhihu.com/question/58230411)
+
 [XGBoost参数调优完全指南（附Python代码）](https://blog.csdn.net/u010657489/article/details/51952785)
+
 《百面机器学习》-葫芦娃
+
 《统计学习方法》-李航
+
 《机器学习》-周志华
 
 

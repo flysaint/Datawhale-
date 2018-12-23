@@ -43,7 +43,7 @@
 ![](https://github.com/flysaint/Datawhale-/blob/master/XGBOOST/XGBOOST%E8%AE%BA%E6%96%87_Elements_in_Supervised_Learning.png)
 
 **说明：**——怎么通过样本得到预测值 $\hat{y}_i$
-1) 线性模型的预测值$\hat{y}_i$  = $\sum_j w_j x_{ij}$。即预测值 $\hat{y}_i$ 是由 每个样本$x_i$的和权值$w$乘积的累加。
+1) 线性模型的预测值 $\hat{y}_i$  = $\sum_j w_j x_{ij}$。即预测值 $\hat{y}_i$ 是由 每个样本$x_i$的和权值$w$乘积的累加。
 
 2) 线性模型中，预测值 $\hat{y}_i$ 是一个预测分数。
 

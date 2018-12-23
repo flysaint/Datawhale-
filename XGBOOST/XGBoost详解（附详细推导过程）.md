@@ -418,6 +418,8 @@ XGBoost的作者把所有的参数分成了三类： 
 
 
 
+## 参考资料
+
 [Regression Tree 回归树](https://blog.csdn.net/weixin_40604987/article/details/79296427)
 
 [xgboost原理](https://blog.csdn.net/a819825294/article/details/51206410)
